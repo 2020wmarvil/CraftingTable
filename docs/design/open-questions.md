@@ -11,4 +11,4 @@ Back to [DESIGN](../DESIGN.md)
 3. **IDL syntax.** Finalize during M1. Keep it simple enough for agents to write correctly. See [ECS and Reflection](ecs-and-reflection.md).
 4. **Agent safety rails.** Which commands require human confirmation (e.g. deleting layers, overwriting assets) when driven via MCP. See [Agent Interface](agent-interface.md).
 5. **Console strategy.** When to validate the renderer boundary against a second backend (D3D12 is the cheap first check).
-6. **Agent instructions.** Add a `CLAUDE.md` / agent guide at the repo root summarizing [Architecture: Hard rules](architecture.md#hard-rules) and the [Testing](testing.md) workflow.
+6. ~~**Agent instructions.**~~ Resolved: see [CLAUDE.md](../../CLAUDE.md) at the repo root.
