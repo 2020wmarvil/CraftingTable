@@ -1,0 +1,59 @@
+# See docs/style-guide.md. Also used for HLSL (format with --assume-filename=x.cpp).
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: Latest
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+LineEnding: LF
+InsertNewlineAtEOF: true
+
+# Allman for namespaces, types, and functions; attached for control flow and lambdas.
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: true
+  AfterControlStatement: Never
+  AfterEnum: true
+  AfterExternBlock: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+InsertBraces: true
+
+AccessModifierOffset: -4
+NamespaceIndentation: None
+FixNamespaceComments: true
+PointerAlignment: Left
+ReferenceAlignment: Left
+DerivePointerAlignment: false
+
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortEnumsOnASingleLine: false
+AlwaysBreakTemplateDeclarations: Yes
+
+# Own header (priority 0), engine modules, third-party, standard library.
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"(core|math|reflect|ecs|platform|render|physics|audio|net|script|asset|sim|tools|game)/'
+    Priority: 1
+  - Regex: '^<[a-z_0-9]+>$'
+    Priority: 3
+  - Regex: '.*'
+    Priority: 2

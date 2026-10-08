@@ -95,6 +95,7 @@ Minimum GPU target: bindless-capable hardware (roughly Turing / RDNA2 / Apple M1
 - [Networking](design/networking.md): co-op replication model, transport, testability
 
 **Process**
+- [Style Guide](style-guide.md): code, shader, data, and docs conventions
 - [Testing](design/testing.md): verification layers and CI
 - [Milestones](design/milestones.md): M0 through M5
 - [Open Questions](design/open-questions.md)
