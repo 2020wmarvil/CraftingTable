@@ -39,10 +39,13 @@ jobs:
 
       - if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
+      # Ubuntu 24.04 ships Clang 18, whose libstdc++ pairing lacks std::expected. Clang 19+ is required.
       - if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y ninja-build
+        run: |
+          sudo apt-get update && sudo apt-get install -y ninja-build
+          wget -qO- https://apt.llvm.org/llvm.sh | sudo bash -s -- 20
 
-      - run: cmake --preset ${{ matrix.preset }}
+      - run: cmake --preset ${{ matrix.preset }} ${{ runner.os == 'Linux' && '-DCMAKE_CXX_COMPILER=clang++-20' || '' }}
       - run: cmake --build --preset ${{ matrix.preset }}-${{ matrix.config }}
       - run: ctest --preset ${{ matrix.preset }}-${{ matrix.config }} --output-junit test-results.xml
 
@@ -62,7 +65,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - run: |
+          sudo apt-get update && sudo apt-get install -y ninja-build
+          wget -qO- https://apt.llvm.org/llvm.sh | sudo bash -s -- 20
       - run: pip install clang-tidy==22.1.8
-      - run: cmake --preset linux-clang
+      - run: cmake --preset linux-clang -DCMAKE_CXX_COMPILER=clang++-20
       - run: python scripts/check.py tidy --build-dir build/linux-clang
