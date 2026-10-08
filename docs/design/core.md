@@ -7,7 +7,8 @@ tags: [design, core]
 Back to [DESIGN](../DESIGN.md)
 
 ## Build and dependencies
-- CMake, all deps vendored under `third_party/` at pinned versions.
+- CMake with presets (`windows-msvc`, `linux-clang`), Ninja Multi-Config. C++23, no C++20 modules.
+- Third-party deps are git submodules under `third_party/`, pinned to exact commits. Clone with `--recursive`. Add a dependency only when the current milestone needs it.
 - OpenUSD is built once per platform by a script into a prebuilt directory (it is too heavy to rebuild on every configure). Its source version and the Python version it targets are pinned together. See [Assets and USD](assets-and-usd.md).
 - Tools and runtime are separate CMake targets so the runtime build never touches USD or Python.
 

@@ -54,7 +54,7 @@ Minimum GPU target: bindless-capable hardware (roughly Turing / RDNA2 / Apple M1
 | Area | Choice | Note |
 |---|---|---|
 | Language | C++20 (adopt C++23 features where all three compilers support them) | [Core](design/core.md) |
-| Build | CMake, all third-party deps vendored in-tree (pinned sources) | [Core](design/core.md) |
+| Build | CMake presets, third-party deps as pinned git submodules | [Core](design/core.md) |
 | Graphics abstraction | NVRHI, used directly inside the renderer module | [Rendering](design/rendering.md) |
 | Shaders | HLSL compiled with DXC (DXIL + SPIR-V), offline via ShaderMake | [Rendering](design/rendering.md) |
 | Frame structure | Simple ordered pass list, deferred G-buffer | [Rendering](design/rendering.md) |

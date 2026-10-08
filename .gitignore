@@ -2,3 +2,6 @@
 docs/.obsidian/workspace.json
 docs/.obsidian/workspace-mobile.json
 docs/.obsidian/cache
+
+# Build output
+build/

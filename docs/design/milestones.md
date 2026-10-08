@@ -7,8 +7,8 @@ tags: [design, roadmap]
 Back to [DESIGN](../DESIGN.md)
 
 ## M0: Foundations
-- Repo, CMake, vendored deps, CI on Windows and Linux.
-- doctest, structured JSON logging, headless app entry point.
+- Repo, CMake presets, deps as submodules, CI on Windows and Linux (build, test, format, tidy).
+- doctest, structured JSON logging, editor executable skeleton (headless only).
 
 ## M1: Headless verification loop (the agent baseline)
 - IDL + codegen v0 (Transform, Hierarchy, MeshRenderer, Camera, Light). See [ECS and Reflection](ecs-and-reflection.md).

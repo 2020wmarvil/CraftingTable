@@ -3,6 +3,7 @@ Checks: >
   -*,
   bugprone-*,
   -bugprone-easily-swappable-parameters,
+  -bugprone-exception-escape,
   modernize-*,
   -modernize-use-trailing-return-type,
   -modernize-avoid-c-arrays,

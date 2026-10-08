@@ -51,7 +51,7 @@ AlwaysBreakTemplateDeclarations: Yes
 SortIncludes: CaseSensitive
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: '^"(core|math|reflect|ecs|platform|render|physics|audio|net|script|asset|sim|tools|game)/'
+  - Regex: '^"(core|math|reflect|ecs|platform|render|physics|audio|net|script|asset|sim|editor)/'
     Priority: 1
   - Regex: '^<[a-z_0-9]+>$'
     Priority: 3

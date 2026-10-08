@@ -13,8 +13,8 @@ Back to [DESIGN](../DESIGN.md)
 - Commands write to the USD stage at edit time (see [Assets and USD: Edit-time source of truth](assets-and-usd.md#edit-time-source-of-truth)).
 
 ## Engine server
-- The engine (editor or headless) exposes a JSON-RPC API on localhost (nlohmann/json).
-- The ImGui editor can run in-process with the same API.
+- The editor exposes a JSON-RPC API on localhost (nlohmann/json), whether it runs headless or windowed.
+- The server is a library inside the editor process, not a separate program (see [Architecture: Executables](architecture.md#executables)). The ImGui UI calls the same command layer in-process.
 
 ## MCP server and Python client
 - One Python package provides both the Python client library and the MCP server (official MCP Python SDK), as thin wrappers over JSON-RPC.

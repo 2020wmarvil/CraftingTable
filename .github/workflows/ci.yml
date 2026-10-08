@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Pinned to match the clang-format that ships with Visual Studio, so local and CI agree.
+      - run: pip install clang-format==22.1.3
+      - run: python scripts/check.py format
+
+  build-test:
+    name: build-test (${{ matrix.preset }}, ${{ matrix.config }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, preset: windows-msvc, config: debug }
+          - { os: windows-latest, preset: windows-msvc, config: release }
+          - { os: ubuntu-24.04, preset: linux-clang, config: debug }
+          - { os: ubuntu-24.04, preset: linux-clang, config: release }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y ninja-build
+
+      - run: cmake --preset ${{ matrix.preset }}
+      - run: cmake --build --preset ${{ matrix.preset }}-${{ matrix.config }}
+      - run: ctest --preset ${{ matrix.preset }}-${{ matrix.config }} --output-junit test-results.xml
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.preset }}-${{ matrix.config }}
+          path: build/${{ matrix.preset }}/test-results.xml
+          if-no-files-found: ignore
+
+  tidy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - run: pip install clang-tidy==22.1.8
+      - run: cmake --preset linux-clang
+      - run: python scripts/check.py tidy --build-dir build/linux-clang

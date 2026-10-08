@@ -20,9 +20,10 @@ Back to [DESIGN](../DESIGN.md)
 | D10 | IDL + Python codegen for reflection | One definition, eight projections, typed MCP tools | [ECS and Reflection](ecs-and-reflection.md) |
 | D11 | MCP server + Python client over JSON-RPC | Agents and scripts share one API | [Agent Interface](agent-interface.md) |
 | D12 | Luau runtime + Python tools + C++ hot reload | Agent-friendly languages, sandboxed runtime, fast native iteration | [Gameplay and Middleware](gameplay-and-middleware.md) |
-| D13 | CMake + vendored deps | Full control, reproducible builds | [Core](core.md) |
+| D13 | CMake + deps as pinned git submodules | Full control and reproducible builds without bloating the repo the way copied sources would | [Core](core.md) |
 | D14 | SDL3, Jolt, miniaudio, defer game UI | Proven, permissive, easy to vendor | [Gameplay and Middleware](gameplay-and-middleware.md) |
 | D15 | STL + custom allocators, GLM | YAGNI. GLM is well known to agents | [Core](core.md) |
 | D16 | Host-authoritative co-op networking over GameNetworkingSockets | Co-op focus, NAT traversal, Steam-compatible API | [Networking](networking.md) |
 | D17 | Fixed tick + interpolated render | Required for clean replication and determinism | [Core](core.md) |
 | D18 | Headless verification loop is M1 | Engine dev is LLM-driven; agents need to see and test their work first | [Milestones](milestones.md) |
+| D19 | One editor executable, headless or windowed; JSON-RPC server is a library inside it | Humans and agents share live sessions, trivial viewport; CMake target boundaries enforce that the UI only uses the command layer | [Architecture](architecture.md#executables) |
